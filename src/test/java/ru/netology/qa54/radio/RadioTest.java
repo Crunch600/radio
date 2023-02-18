@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 public class RadioTest {
+    Radio radio = new Radio();
 
     @ParameterizedTest
     @CsvSource({
@@ -14,11 +15,9 @@ public class RadioTest {
     })
 
     public void shouldSetStation(int valueStation, int expected) {
-        Radio radio = new Radio();
 
         radio.setCurrentStation(valueStation);
 
-        //int expected = 1;
         int actual = radio.getCurrentStation();
 
         Assertions.assertEquals(expected, actual);
@@ -27,17 +26,16 @@ public class RadioTest {
 
     @ParameterizedTest
     @CsvSource({
-            "1,2",
-            "9,0"
+            "9,8,0",
+            "20,17,18"
     })
 
-    public void shouldToNextStation(int valueStation, int expected) {
-        Radio radio = new Radio();
+    public void shouldToNextStation(int amountStations, int valueStation, int expected) {
+        Radio radio = new Radio( amountStations);
         radio.setCurrentStation(valueStation);
 
         radio.setToNextStation();
 
-        //int expected = 0;
         int actual = radio.getCurrentStation();
 
         Assertions.assertEquals(expected, actual);
@@ -46,17 +44,16 @@ public class RadioTest {
 
     @ParameterizedTest
     @CsvSource({
-            "0,9",
-            "8,7"
+            "10,0,9",
+            "10,8,7"
     })
 
-    public void shouldToPrevStation(int valueStation, int expected) {
-        Radio radio = new Radio();
+    public void shouldToPrevStation(int amountStationsint, int valueStation, int expected) {
+        Radio radio = new Radio(amountStationsint);
         radio.setCurrentStation(valueStation);
 
         radio.setToPrevStation();
 
-        //int expected = 8;
         int actual = radio.getCurrentStation();
 
         Assertions.assertEquals(expected, actual);
@@ -66,15 +63,14 @@ public class RadioTest {
     @CsvSource({
             "1,1",
             "-1,0",
-            "11,0"
+            "11,11",
+            "101,0"
     })
 
-    public void shouldSetLoudSound(int valueStation, int expected) {
-        Radio radio = new Radio();
+    public void shouldSetLoudSound(int valueLoud, int expected) {
 
-        radio.setLoudSound(valueStation);
+        radio.setLoudSound(valueLoud);
 
-        //int expected = 5;
         int actual = radio.getLoudSound();
 
         Assertions.assertEquals(expected, actual);
@@ -84,16 +80,16 @@ public class RadioTest {
     @ParameterizedTest
     @CsvSource({
             "0,1",
-            "10,10"
+            "10,11",
+            "100,100"
     })
 
-    public void shouldToIncreaseLoud(int valueStation, int expected) {
-        Radio radio = new Radio();
-        radio.setLoudSound(valueStation);
+    public void shouldToIncreaseLoud(int valueLoud, int expected) {
+
+        radio.setLoudSound(valueLoud);
 
         radio.increaseLoud();
 
-        //int expected = 4;
         int actual = radio.getLoudSound();
 
         Assertions.assertEquals(expected, actual);
@@ -106,13 +102,12 @@ public class RadioTest {
             "0,0"
     })
 
-    public void shouldToDownLoud(int valueStation, int expected) {
-        Radio radio = new Radio();
-        radio.setLoudSound(valueStation);
+    public void shouldToDownLoud(int valueLoud, int expected) {
+
+        radio.setLoudSound(valueLoud);
 
         radio.downLoud();
 
-        //int expected = 6;
         int actual = radio.getLoudSound();
 
         Assertions.assertEquals(expected, actual);

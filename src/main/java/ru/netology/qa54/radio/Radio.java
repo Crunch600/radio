@@ -2,12 +2,21 @@ package ru.netology.qa54.radio;
 
 public class Radio {
 
-    private int currentStation;
     private final int minStation = 0;
-    private final int maxStation = 9;
+    private final int maxStation;
+    private int currentStation;
     private int loudSound;
     private final int minLoud = 0;
-    private final int maxLoud = 10;
+    private final int maxLoud = 100;
+
+    public Radio() {
+        this.maxStation = 9;
+    }
+
+    public Radio(int amountStations) {
+        this.maxStation = amountStations - 1;
+    }
+
 
     public int getCurrentStation() {
         return currentStation;
@@ -26,7 +35,7 @@ public class Radio {
         if (newCurrentStation < minStation) {
             return;
         }
-        currentStation = newCurrentStation;
+        this.currentStation = newCurrentStation;
 
     }
 
@@ -35,7 +44,7 @@ public class Radio {
         if (currentStation >= maxStation) {
             setCurrentStation(minStation);
         } else {
-            currentStation = currentStation + 1;
+            this.currentStation = currentStation + 1;
         }
 
     }
@@ -45,7 +54,7 @@ public class Radio {
         if (currentStation <= minStation) {
             setCurrentStation(maxStation);
         } else {
-            currentStation = currentStation - 1;
+            this.currentStation = currentStation - 1;
         }
     }
 
@@ -83,3 +92,4 @@ public class Radio {
 
 
 }
+
